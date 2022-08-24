@@ -39,7 +39,7 @@ public class QRCodeService {
 		Account account = accountRepository.findOneByAccountNumber(accountNumber);
 		
 		if(account!=null) {
-			new ResponseEntity<String>("Success",HttpStatus.OK);
+			return new ResponseEntity<String>("Success",HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("Failed",HttpStatus.UNAUTHORIZED);
 	}
