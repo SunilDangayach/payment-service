@@ -1,0 +1,12 @@
+ {
+"comMethod": {
+    "id": "webhook",
+    "type": 2,
+    "value": "https://69c9-92-24-147-208.ngrok.io/webhook",
+    "packaging": {
+        "pkgType": "plain"
+    }
+},
+"@type": "did:sov:123456789abcdefghi1234;spec/configs/0.6/UPDATE_COM_METHOD",
+"@id": "4a5817bc-351b-426e-bbe8-4750a6dd1a34"
+}

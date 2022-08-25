@@ -12,6 +12,8 @@ import com.discover.dpay.payment_service.model.AccountRequest;
 import com.discover.dpay.payment_service.model.AccountResponse;
 import com.discover.dpay.payment_service.repo.AccountRepository;
 import com.discover.dpay.payment_service.repo.UserRepository;
+import com.discover.dpay.payment_service.service.issuer.DiscoverIssuer;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Service
 public class AccountService {
@@ -21,6 +23,9 @@ public class AccountService {
 	
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private DiscoverIssuer discoverIssuer;
 
 	private Account getAccount(AccountRequest accountRequest, User user) {
 		return Account.builder().accountNumber(accountRequest.getAccountNumber()).user_id(user.getUserId()).build();
@@ -34,12 +39,18 @@ public class AccountService {
 		 return accountRepo.getById(id);
 	}
 
-	public AccountResponse saveAccount(long userId, AccountRequest accountRequest) {
+	public AccountResponse saveAccount(long userId, AccountRequest accountRequest) throws JsonProcessingException {
 		Optional<User> user = userRepo.findById(userId);
 		Account account = null;
 		if(user.isPresent()) {
 			account = accountRepo.save(getAccount(accountRequest,user.get()));
 		}
+		discoverIssuer.updateWebHookEndpoint();
+		discoverIssuer.updateConfigMessage();
+		discoverIssuer.releationShipMessage();
+		discoverIssuer.relationShipInvite();
+		discoverIssuer.createCrentidals(accountRequest,user);
+		
 		return getAccountResponse(account,user.get()); 
 	}
 

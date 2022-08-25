@@ -1,0 +1,7 @@
+{
+"~for_relationship": "2LXzk6QPpchvXKBHSANQrv",
+"goalCode": "issue-vc",
+"goal": "To issue a credential",
+"@type": "did:sov:123456789abcdefghi1234;spec/relationship/1.0/out-of-band-invitation",
+"@id": "76f23519-0251-4850-8e43-7f1ecfccba48"
+ }
