@@ -1,0 +1,14 @@
+{
+  "configs": [
+    {
+      "name": "logoUrl",
+      "value": "https://freeiconshop.com/wp-content/uploads/edd/bank-flat.png"
+    },
+    {
+      "name": "name",
+      "value": "Issuer"
+    }
+  ],
+  "@type": "did:sov:123456789abcdefghi1234;spec/update-configs/0.6/update",
+  "@id": "b0a83633-6d85-4759-8bf5-bd4e41d39f74"
+}

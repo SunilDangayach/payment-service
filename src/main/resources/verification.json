@@ -1,0 +1,21 @@
+{
+  "request~attach": [],
+  "profileUrl": "https://freeiconshop.com/wp-content/uploads/edd/bank-flat.png",
+  "public_did": "did:sov:CnZPjNwiKzcEpeGVk7fv2Z",
+  "goal": "To issue a credential",
+  "goal_code": "issue-vc",
+  "service": [{
+    "recipientKeys": ["jG1tvbpRbPTbxC8K2PujnUdYRb35EtFHe7iJm2uCRm3"],
+    "id": "2LXzk6QPpchvXKBHSANQrv;indy",
+    "routingKeys": [
+      "jG1tvbpRbPTbxC8K2PujnUdYRb35EtFHe7iJm2uCRm3",
+      "ExPFLx4uNjF9jRQJV7XxAt8MfuXJENgbgA1qNmWznsRZ"
+    ],
+    "serviceEndpoint": "https://vas.pps.evernym.com/agency/msg",
+    "type": "IndyAgent"
+  }],
+  "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/out-of-band/1.0/invitation",
+  "handshake_protocols": ["did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0"],
+  "label": "Issuer",
+  "@id": "d9802917-8a6b-4b12-a863-1ef783d75336"
+}
