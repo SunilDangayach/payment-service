@@ -23,12 +23,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.discover.dpay.payment_service.entity.Account;
 import com.discover.dpay.payment_service.model.AccountRequest;
-import com.discover.dpay.payment_service.model.AccountResponse;
 import com.discover.dpay.payment_service.service.AccountService;
 import com.discover.dpay.payment_service.service.QRCodeService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.NotFoundException;
+import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
@@ -46,10 +45,10 @@ public class AccountController {
 	@Autowired
 	private QRCodeService qrCodeService;
 	
-	@PostMapping("/user/{userid}/account")
-	public ResponseEntity<AccountResponse> createAccount(@Valid @RequestBody AccountRequest accountRequest, @PathParam(value="userid") Long userid) throws JsonProcessingException {
-		AccountResponse account = accountService.saveAccount(userid,accountRequest);
-		return new ResponseEntity<AccountResponse>(account,HttpStatus.OK);
+	@PostMapping(path="/user/{userid}/account", produces = MediaType.IMAGE_PNG_VALUE)
+	public BufferedImage createAccount(@Valid @RequestBody AccountRequest accountRequest, @PathParam(value="userid") Long userid) throws WriterException, IOException {
+		return accountService.saveAccount(userid,accountRequest);
+		
 	}
 
 	@PostMapping(path = "/account/{account_id}/qrcode", produces = MediaType.IMAGE_PNG_VALUE)

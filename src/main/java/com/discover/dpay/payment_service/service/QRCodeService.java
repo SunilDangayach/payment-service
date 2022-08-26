@@ -29,6 +29,9 @@ public class QRCodeService {
 	@Autowired
 	private AccountRepository accountRepository;
 	
+	@Autowired
+	private VerfiyService verfiyService;
+	
 	public ResponseEntity<?> read(final MultipartFile file) throws IOException, NotFoundException {
 		BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
 		LuminanceSource luminanceSource = new BufferedImageLuminanceSource(bufferedImage);
@@ -38,7 +41,7 @@ public class QRCodeService {
 		
 		Account account = accountRepository.findOneByAccountNumber(accountNumber);
 		
-		if(account!=null) {
+		if(account!=null && verfiyService.verify()) {
 			return new ResponseEntity<String>("Success",HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("Failed",HttpStatus.UNAUTHORIZED);

@@ -1,5 +1,7 @@
 package com.discover.dpay.payment_service.service;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +16,7 @@ import com.discover.dpay.payment_service.repo.AccountRepository;
 import com.discover.dpay.payment_service.repo.UserRepository;
 import com.discover.dpay.payment_service.service.issuer.DiscoverIssuer;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.zxing.WriterException;
 
 @Service
 public class AccountService {
@@ -39,24 +42,17 @@ public class AccountService {
 		 return accountRepo.getById(id);
 	}
 
-	public AccountResponse saveAccount(long userId, AccountRequest accountRequest) throws JsonProcessingException {
+	public BufferedImage saveAccount(long userId, AccountRequest accountRequest) throws WriterException, IOException {
 		Optional<User> user = userRepo.findById(userId);
-		Account account = null;
-		if(user.isPresent()) {
-			account = accountRepo.save(getAccount(accountRequest,user.get()));
-		}
 		discoverIssuer.updateWebHookEndpoint();
 		discoverIssuer.updateConfigMessage();
 		discoverIssuer.releationShipMessage();
 		discoverIssuer.relationShipInvite();
 		discoverIssuer.createCrentidals(accountRequest,user);
 		
-		return getAccountResponse(account,user.get()); 
+		return discoverIssuer.generateQRCodeFromVerificationURL();
 	}
 
-	private AccountResponse getAccountResponse(Account account,User user) {
-		return AccountResponse.builder().id(account.getId()).userName(user.getName()).build();
-	}
 
 }
 

@@ -23,7 +23,7 @@ public abstract class Helper {
     public static final String ANSII_GREEN = "\u001B[32m";
     public static final String ANSII_RESET = "\u001B[0m";
 
-    void execute() {
+    public void execute() {
         try {
             start();
             example();
